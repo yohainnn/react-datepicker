@@ -401,7 +401,7 @@ export default class Calendar extends React.Component {
     );
   };
 
-  renderPreviousButton = () => {
+  renderLeftButton = (localeDirection) => {
     if (this.props.renderCustomHeader) {
       return;
     }
@@ -433,14 +433,14 @@ export default class Calendar extends React.Component {
       "react-datepicker__navigation--previous"
     ];
 
-    let clickHandler = this.decreaseMonth;
+    let clickHandler = localeDirection === LOCALE_DIRECTIONS.LTR ? this.decreaseMonth : this.increaseMonth;
 
     if (
       this.props.showMonthYearPicker ||
       this.props.showQuarterYearPicker ||
       this.props.showYearPicker
     ) {
-      clickHandler = this.decreaseYear;
+      clickHandler = localeDirection === LOCALE_DIRECTIONS.LTR ? this.decreaseYear : this.increaseYear;
     }
 
     if (allPrevDaysDisabled && this.props.showDisabledMonthNavigation) {
@@ -481,7 +481,7 @@ export default class Calendar extends React.Component {
     );
   };
 
-  renderNextButton = () => {
+  renderRightButton = (localeDirection) => {
     if (this.props.renderCustomHeader) {
       return;
     }
@@ -519,14 +519,14 @@ export default class Calendar extends React.Component {
       classes.push("react-datepicker__navigation--next--with-today-button");
     }
 
-    let clickHandler = this.increaseMonth;
+    let clickHandler = localeDirection === LOCALE_DIRECTIONS.LTR ? this.increaseMonth : this.decreaseMonth;
 
     if (
       this.props.showMonthYearPicker ||
       this.props.showQuarterYearPicker ||
       this.props.showYearPicker
     ) {
-      clickHandler = this.increaseYear;
+      clickHandler = localeDirection === LOCALE_DIRECTIONS.LTR ? this.increaseYear : this.decreaseYear;
     }
 
     if (allNextDaysDisabled && this.props.showDisabledMonthNavigation) {
@@ -557,16 +557,6 @@ export default class Calendar extends React.Component {
       </button>
     );
   };
-
-  renderRightButton = (localeDirection) => {
-    console.log('consoling from render right button')
-    return localeDirection === LOCALE_DIRECTIONS.LTR ? this.renderNextButton() : this.renderPreviousButton();
-  }
-
-  renderLeftButton = (localeDirection) => {
-    console.log('consoling from render left button')
-    return localeDirection === LOCALE_DIRECTIONS.LTR ? this.renderPreviousButton() : this.renderNextButton();
-  }
 
   renderCurrentMonth = (date = this.state.date) => {
     const classes = ["react-datepicker__current-month"];
@@ -900,7 +890,6 @@ export default class Calendar extends React.Component {
   };
 
   render() {
-    console.log('consoling from datepicker module')
     const Container = this.props.container || CalendarContainer;
     return (
       <div ref={this.containerRef}>
