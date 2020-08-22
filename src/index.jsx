@@ -35,6 +35,7 @@ import {
   getDefaultLocale
 } from "./date_utils";
 import onClickOutside from "react-onclickoutside";
+import {LOCALE_DIRECTIONS} from "./constants";
 
 export { default as CalendarContainer } from "./calendar_container";
 
@@ -65,6 +66,7 @@ export default class DatePicker extends React.Component {
       allowSameDay: false,
       dateFormat: "MM/dd/yyyy",
       dateFormatCalendar: "LLLL yyyy",
+      localeDirection: LOCALE_DIRECTIONS.LTR,
       onChange() {},
       disabled: false,
       disabledKeyboardNavigation: false,
@@ -249,7 +251,8 @@ export default class DatePicker extends React.Component {
     excludeScrollbar: PropTypes.bool,
     enableTabLoop: PropTypes.bool,
     customTimeInput: PropTypes.element,
-    weekAriaLabelPrefix: PropTypes.string
+    weekAriaLabelPrefix: PropTypes.string,
+    localeDirection: PropTypes.string,
   };
 
   constructor(props) {
@@ -780,6 +783,7 @@ export default class DatePicker extends React.Component {
           this.calendar = elem;
         }}
         locale={this.props.locale}
+        localeDirection={this.props.localeDirection}
         chooseDayAriaLabelPrefix={this.props.chooseDayAriaLabelPrefix}
         disabledDayAriaLabelPrefix={this.props.disabledDayAriaLabelPrefix}
         weekAriaLabelPrefix={this.props.weekAriaLabelPrefix}

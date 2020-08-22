@@ -9,6 +9,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import CalendarContainer from "./calendar_container";
+import { LOCALE_DIRECTIONS } from "./constants";
 import {
   newDate,
   setMonth,
@@ -175,7 +176,8 @@ export default class Calendar extends React.Component {
     isInputFocused: PropTypes.bool,
     customTimeInput: PropTypes.element,
     weekAriaLabelPrefix: PropTypes.string,
-    setPreSelection: PropTypes.func
+    setPreSelection: PropTypes.func,
+    localeDirection: PropTypes.string,
   };
 
   constructor(props) {
@@ -556,6 +558,14 @@ export default class Calendar extends React.Component {
     );
   };
 
+  renderRightButton = (localeDirection) => {
+    return localeDirection === LOCALE_DIRECTIONS.LTR ? this.renderPreviousButton() : this.renderNextButton();
+  }
+
+  renderLeftButton = (localeDirection) => {
+    return localeDirection === LOCALE_DIRECTIONS.LTR ? this.renderNextButton() : this.renderPreviousButton();
+  }
+
   renderCurrentMonth = (date = this.state.date) => {
     const classes = ["react-datepicker__current-month"];
 
@@ -898,8 +908,8 @@ export default class Calendar extends React.Component {
           showPopperArrow={this.props.showPopperArrow}
           arrowProps={this.props.arrowProps}
         >
-          {this.renderPreviousButton()}
-          {this.renderNextButton()}
+          {this.renderRightButton(this.props.localeDirection)}
+          {this.renderLeftButton(this.props.localeDirection)}
           {this.renderMonths()}
           {this.renderYears()}
           {this.renderTodayButton()}
