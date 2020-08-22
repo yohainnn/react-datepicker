@@ -559,11 +559,11 @@ export default class Calendar extends React.Component {
   };
 
   renderRightButton = (localeDirection) => {
-    return localeDirection === LOCALE_DIRECTIONS.LTR ? this.renderPreviousButton() : this.renderNextButton();
+    return localeDirection === LOCALE_DIRECTIONS.LTR ? this.renderNextButton() : this.renderPreviousButton();
   }
 
   renderLeftButton = (localeDirection) => {
-    return localeDirection === LOCALE_DIRECTIONS.LTR ? this.renderNextButton() : this.renderPreviousButton();
+    return localeDirection === LOCALE_DIRECTIONS.LTR ? this.renderPreviousButton() : this.renderNextButton();
   }
 
   renderCurrentMonth = (date = this.state.date) => {
