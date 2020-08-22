@@ -559,10 +559,12 @@ export default class Calendar extends React.Component {
   };
 
   renderRightButton = (localeDirection) => {
+    console.log('consoling from render right button')
     return localeDirection === LOCALE_DIRECTIONS.LTR ? this.renderNextButton() : this.renderPreviousButton();
   }
 
   renderLeftButton = (localeDirection) => {
+    console.log('consoling from render left button')
     return localeDirection === LOCALE_DIRECTIONS.LTR ? this.renderPreviousButton() : this.renderNextButton();
   }
 
@@ -898,6 +900,7 @@ export default class Calendar extends React.Component {
   };
 
   render() {
+    console.log('consoling from datepicker module')
     const Container = this.props.container || CalendarContainer;
     return (
       <div ref={this.containerRef}>
